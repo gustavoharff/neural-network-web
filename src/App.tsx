@@ -14,6 +14,12 @@ function App() {
 
     axios.post("http://104.248.123.250:80", data).then((response) => {
       setResult(JSON.stringify(response.data, null, 4));
+    }).catch(error => {
+      if (axios.isAxiosError(error) && error.response?.status === 413) {
+        alert('Arquivo muito grande.')
+      } else {
+        alert('Ocorreu um erro' + error)
+      }
     });
   }, [file]);
 
